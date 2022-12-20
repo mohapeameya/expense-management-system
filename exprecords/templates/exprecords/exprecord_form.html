@@ -1,0 +1,41 @@
+{% extends "exprecords/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="content-section">
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		<legend class="border-bottom mb-4">Create Expense</legend>
+		<div class="form-row">
+	      <div class="form-group col-md-12 mb-0">
+	        {{ form.item | as_crispy_field }}
+	      </div>
+	      <div class="form-group col-md-6 col-sm-12 mb-0">
+	        {{ form.project | as_crispy_field }}
+	      </div>
+	      <div class="form-group col-md-6 col-sm-12 mb-0">
+	        {{ form.date | as_crispy_field }}
+	      </div>
+	    </div>
+	    <div class="form-row">
+	      <div class="form-group col-md-6 col-sm-12 mb-0">
+	        {{ form.cost | as_crispy_field }}
+	      </div>
+	      <div class="form-group col-md-6 col-sm-12 mb-0">
+	      	<!-- <label class="file"> -->
+	        {{ form.proof | as_crispy_field }}
+	        <!-- <span class="file-custom"></span> -->
+	        <!-- </label> -->
+	      </div>
+	    </div>
+		<div class="form-group mt-4">
+			<button class="btn btn-outline-info" type="submit">Create</button>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+	$( document ).ready(function() {
+		$("#id_date").prop('type', 'date');
+	});
+</script>
+{% endblock content %}

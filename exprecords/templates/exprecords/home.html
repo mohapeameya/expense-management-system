@@ -1,0 +1,69 @@
+{% extends "exprecords/base.html" %}
+{% block content %}
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <!-- <div class="row"> -->
+  	<!-- <div class="col-md-3"> -->
+  		<!-- <h4>Total expenditure: {{ total_exp.cost__sum }}</h4> -->
+  	<!-- </div> -->
+  	<!-- <div class="col-md-9"> -->
+      {% if total_exp.cost__sum %}
+        <div>
+    		  <canvas id="pie-chart-1"></canvas>
+        </div>
+        <h4>Total expenditure: {{ total_exp.cost__sum }}</h4>
+      {% else %}
+        <h4>No expenses found!!!</h4>
+      {% endif %}
+  	<!-- </div> -->
+  	<!-- <div class="col-md-6">
+  		<canvas id="pie-chart-2"></<center></center>anvas>
+  	</div> -->
+  <!-- </div> -->
+
+  <script>
+
+	var backgroundColor = ['#ff0000', '#9c46d0', '#52d726', '#ff7300', '#97d9ff', '#ff9234'];
+	var options = {
+        // responsive: true,
+        title: {
+            display: true,
+            text: 'Expenditure',
+            fontSize: 20
+        }
+      }
+    var config1 = {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: {{ data1|safe }},
+          backgroundColor: backgroundColor,
+          label: 'Expenditure'
+        }],
+        labels: {{ labels1|safe }}
+      },
+      options: options
+    };
+
+    var config2 = {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: {{ data2|safe }},
+          backgroundColor: backgroundColor,
+          label: 'Contribution'
+        }],
+        labels: {{ labels2|safe }}
+      },
+      options: options
+    };
+
+    window.onload = function() {
+      var ctx1 = document.getElementById('pie-chart-1').getContext('2d');
+      // var ctx2 = document.getElementById('pie-chart-2').getContext('2d');
+      window.myPie1 = new Chart(ctx1, config1);
+      // window.myPie2 = new Chart(ctx2, config2);
+    };
+
+  </script>
+{% endblock content %}

@@ -1,0 +1,8 @@
+{% extends "exprecords/base.html" %}
+{% block content %}
+	<h3>Expenditure Recording System</h3>
+	{% if not user.is_authenticated %}
+	<hr>
+	<h4><a href="{% url 'login' %}">Login</a> with your credentials to access the interface</h4>
+	{% endif %}
+{% endblock content %}
